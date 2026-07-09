@@ -8,6 +8,9 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
 
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.1-noble
+
     steps:
       - uses: actions/checkout@v4
 
@@ -20,13 +23,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-
       - name: Run E2E tests
         run: npm run test:ci
 
       - name: Trigger Vercel deployment
         if: success()
-        run: |
-          curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
+        run: curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
