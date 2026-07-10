@@ -7,11 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:ci": "playwright test",
-    "test:e2e": "npm run playwright test",
-    "test:e2e:ui": "npm run playwright test --ui",
-    "test:e2e:headed": "npm run playwright test --headed",
-    "test:e2e:debug": "npm run playwright test --debug"
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug"
   },
   "dependencies": {
     "next": "16.2.10",

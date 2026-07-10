@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Run E2E tests
-        run: npm run test:ci
+        run: npm run test:e2e
 
       - name: Trigger Vercel deployment
         if: success()
