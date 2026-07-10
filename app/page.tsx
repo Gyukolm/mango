@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [cookies, setCookies] = useState(0);
+  const [secretMessage, setSecretMessage] = useState("");
   const [clickPower, setClickPower] = useState(1);
   const [autoPower, setAutoPower] = useState(0);
   const [bakerLevel, setBakerLevel] = useState(0);
@@ -16,6 +17,33 @@ export default function Home() {
 
     return () => window.clearInterval(interval);
   }, [autoPower]);
+
+  useEffect(() => {
+    let typed = "";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const key = event.key.toLowerCase();
+
+      if (key === "backspace") {
+        typed = typed.slice(0, -1);
+        return;
+      }
+
+      if (/^[a-z]$/.test(key)) {
+        typed += key;
+      }
+
+      if (typed.includes("mango")) {
+        setCookies((current) => current + 1000000);
+        setSecretMessage("Secret activated: +1,000,000 mangoes!");
+        typed = "";
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const bakerCost = 10 + bakerLevel * 5;
   const ovenCost = 25 + ovenLevel * 15;
@@ -57,6 +85,11 @@ export default function Home() {
           <div className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
             Mangoes • {clickPower} per click • {autoPower} per second
           </div>
+          {secretMessage ? (
+            <p className="mt-3 text-sm font-medium text-amber-600 dark:text-amber-400">
+              {secretMessage}
+            </p>
+          ) : null}
         </div>
 
         <div className="mt-6 flex gap-3">
