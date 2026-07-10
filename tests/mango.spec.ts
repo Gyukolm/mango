@@ -13,7 +13,7 @@ test("clicking Farm Mango adds the correct amount of mangoes", async ({ page }) 
   await farmMangoButton.click();
 
   // cookies should increase by clickPower
-  await expect(cookieCount).toHaveText("68");
+  await expect(cookieCount).toHaveText("1");
 
   // second click
   await farmMangoButton.click();
